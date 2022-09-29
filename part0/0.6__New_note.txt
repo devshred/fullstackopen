@@ -1,0 +1,12 @@
+note over browser:
+browser sends new note to server
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server-->browser: HTTP Status Code 201
+
+note over browser:
+browser starts executing js-code that
+* adds the new note to list of notes
+* replace the current representation of notes in DOM with updated list
+end note
