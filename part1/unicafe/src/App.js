@@ -19,6 +19,23 @@ const App = () => {
   const increaseGood = () => setGood(good + 1)
   const increaseNeutral = () => setNeutral(neutral + 1)
   const increaseBad = () => setBad(bad + 1)
+  const average = () => {
+    const total = good + neutral + bad
+    if(total > 0){
+      return (good - bad) / total
+    } else {
+      return 'no values available'
+    }
+  }
+  const positive = () => {
+    const total = good + neutral + bad
+    if(total > 0){
+      const percentage = (good) / (good + neutral + bad) * 100
+      return (<>{percentage} %</>)
+    } else {
+      return 'no values available'
+    }
+  }
 
   return (
     <div>
@@ -31,6 +48,9 @@ const App = () => {
       <Statistics name='good' value={good} />
       <Statistics name='neutral' value={neutral} />
       <Statistics name='bad' value={bad} />
+      <Statistics name='all' value={good + neutral + bad} />
+      <Statistics name='average' value={average()} />
+      <Statistics name='positive' value={positive()} />
     </div>
   )
 }
