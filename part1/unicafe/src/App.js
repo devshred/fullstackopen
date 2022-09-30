@@ -11,34 +11,24 @@ const Button = ({name, onClickEvent}) => {
 const StatisticLine = ({name, value}) => <div>{name} {value}</div>
 
 const Statistics = ({good, neutral, bad}) => {
-  const average = () => {
-    const total = good + neutral + bad
-    if(total > 0){
-      return (good - bad) / total
-    } else {
-      return 'no values available'
-    }
+  const total = good + neutral + bad
+  if(total == 0){
+    return 'No feedback given'
+  } else {
+    const average = (good - bad) / total
+    const positive = <>{(good) / total * 100} %</>
+  
+    return (
+      <>
+        <StatisticLine name='good' value={good} />
+        <StatisticLine name='neutral' value={neutral} />
+        <StatisticLine name='bad' value={bad} />
+        <StatisticLine name='all' value={total} />
+        <StatisticLine name='average' value={average} />
+        <StatisticLine name='positive' value={positive} />
+      </>
+    )
   }
-  const positive = () => {
-    const total = good + neutral + bad
-    if(total > 0){
-      const percentage = (good) / (good + neutral + bad) * 100
-      return <>{percentage} %</>
-    } else {
-      return 'no values available'
-    }
-  }
-
-  return (
-    <>
-      <StatisticLine name='good' value={good} />
-      <StatisticLine name='neutral' value={neutral} />
-      <StatisticLine name='bad' value={bad} />
-      <StatisticLine name='all' value={good + neutral + bad} />
-      <StatisticLine name='average' value={average()} />
-      <StatisticLine name='positive' value={positive()} />
-    </>
-  )
 }
 
 const App = () => {
