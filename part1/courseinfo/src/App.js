@@ -1,10 +1,6 @@
-const Header = props => {
-  return <h1>{props.course}</h1>
-}
+const Header = props => <h1>{props.course}</h1>
 
-const Part = props => {
-  return <p>{props.part} {props.exercises}</p>
-}
+const Part = props => <p>{props.part} {props.exercises}</p>
 
 const Content = props => {
   return (
@@ -16,9 +12,7 @@ const Content = props => {
   )
 }
 
-const Total = props => {
-  return <p>Number of exercises {props.total}</p>
-}
+const Total = props => <p>Number of exercises {props.total}</p>
 
 const App = () => {
   const course = 'Half Stack application development'
