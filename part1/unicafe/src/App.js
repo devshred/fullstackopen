@@ -8,7 +8,7 @@ const Button = ({name, onClickEvent}) => {
   )
 }
 
-const Statistics = ({name, value}) => <p>{name} {value}</p>
+const Statistics = ({name, value}) => <div>{name} {value}</div>
 
 const App = () => {
   // save clicks of each button to its own state
