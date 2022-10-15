@@ -13,9 +13,9 @@ const Content = ({ parts }) =>
   )
 
 const Total = ({parts}) => {
-  const sum = parts.reduce((total, current) => total + current.exercises, 0);
+  const total = parts.reduce((total, current) => total + current.exercises, 0);
 
-  return <b>total of {sum} exercises</b>
+  return <b>total of {total} exercises</b>
 }
 
 const Note = ({note}) => <li>{note.content}</li>
