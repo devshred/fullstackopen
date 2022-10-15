@@ -8,28 +8,23 @@ const Part = ({ part }) =>
   </p>
 
 const Content = ({ parts }) => 
-  <>
-    <Part
-      part={parts[0]} 
-    />
-    <Part
-      part={parts[1]} 
-    />
-    <Part
-      part={parts[2]} 
-    />      
-  </>
+  parts.map(part => 
+      <Part key={part.id} part={part} />
+  )
 
-const Note = ({note})=>{
-    return (
-      <li>{note.content}</li>
-    )
-  }
+const Total = ({parts}) => {
+  const sum = parts.reduce((total, current) => total + current.exercises, 0);
+
+  return <b>total of {sum} exercises</b>
+}
+
+const Note = ({note}) => <li>{note.content}</li>
 
 const Course = ({course}) => 
     <div>
       <Header course={course.name} />
       <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
 
 export default Course
