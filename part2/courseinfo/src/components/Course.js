@@ -1,6 +1,8 @@
 import React from "react"
 
-const Header = ({ course }) => <h1>{course}</h1>
+const Header = ({ title }) => <h1>{title}</h1>
+
+const SubHeader = ({ course }) => <h2>{course}</h2>
 
 const Part = ({ part }) => 
   <p>
@@ -18,13 +20,16 @@ const Total = ({parts}) => {
   return <b>total of {total} exercises</b>
 }
 
-const Note = ({note}) => <li>{note.content}</li>
-
 const Course = ({course}) => 
     <div>
-      <Header course={course.name} />
+      <SubHeader course={course.name} />
       <Content parts={course.parts} />
       <Total parts={course.parts} />
     </div>
 
-export default Course
+const Courses = ({courses}) => 
+  courses.map(course => 
+    <Course key={course.id} course={course} />
+  )
+
+export default Courses
