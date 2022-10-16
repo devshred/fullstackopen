@@ -1,6 +1,6 @@
 import Country from './Country'
 
-const Countries = ({countries, filter}) => {
+const Countries = ({countries, filter, showHandler}) => {
   const filteredCountries = 
     countries.filter(country => country.name.common.toLowerCase().includes(filter.toLowerCase()))
   if(filteredCountries.length > 10){
@@ -11,7 +11,10 @@ const Countries = ({countries, filter}) => {
     return (
       <div>
         {filteredCountries.map(country => 
-          <Country country={country} />
+          <div>
+            <Country country={country} />&nbsp;
+            <button value={country.name.common} onClick={showHandler}>show</button>
+          </div>
         )}
       </div>
     )

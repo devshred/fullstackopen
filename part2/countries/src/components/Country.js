@@ -14,7 +14,7 @@ const Country = ({ country, full }) => {
       )
     } else {
       return (
-        <div>{country.name.common}</div>
+        <>{country.name.common}</>
       )
     }
   }
