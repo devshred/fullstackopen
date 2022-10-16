@@ -23,9 +23,19 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault()
 
-    const equalRecords = persons.filter(person => person.name === newName).length
-    if(equalRecords > 0){
-      window.alert(`${newName} is already added to phonebook`)
+    const equalRecords = persons.filter(person => person.name === newName)
+    if(equalRecords.length > 0){
+      if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one`)) {
+        const person = equalRecords[0]
+        const personToChange = { ...person, number: newNumber}
+        personService
+          .update(person.id, personToChange)
+          .then(changedPerson => {
+            setPersons(persons.map(p => p.id !== person.id ? p : changedPerson))
+            setNewName('')
+            setNewNumber('')
+          })
+      }
     } else {
       const personObject = {
         id: persons.length + 1,
