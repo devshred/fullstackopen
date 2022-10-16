@@ -43,6 +43,22 @@ const App = () => {
     }
   }
 
+  const removeHandler = (event) => {
+    const pId = parseInt(event.target.value)
+    const person = persons.find(p => p.id === pId)
+    if(window.confirm(`Delete ${person.name} ?`)){
+      personService
+        .remove(person.id)
+        .then( () => {
+          setPersons(persons.filter(p => p.id != person.id))
+        })
+        .catch(() => {
+          alert(`${person.name} was already deleted.`)
+          setPersons(persons.filter(p => p.id != person.id))
+        })
+    }
+  }
+
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
@@ -66,7 +82,7 @@ const App = () => {
         number={newNumber} numberHandler={handleNumberChange} 
       />
       <h2>Numbers</h2>
-      <Persons persons={persons} filter={filter} />
+      <Persons persons={persons} filter={filter} removeHandler={removeHandler} />
     </div>
   )
 }
