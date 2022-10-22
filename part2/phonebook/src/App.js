@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
+import Notification from './components/Notification'
 import personService from './services/persons'
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
   const [filter, setNewFilter] = useState('')
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [notification, setNotification] = useState(null)
 
   const initialDataLoadHook = () => {
     personService
@@ -34,6 +36,12 @@ const App = () => {
             setPersons(persons.map(p => p.id !== person.id ? p : changedPerson))
             setNewName('')
             setNewNumber('')
+            setNotification(
+              `Changed number of ${person.name}`
+            )
+            setTimeout(() => {
+              setNotification(null)
+            }, 5000)
           })
       }
     } else {
@@ -49,6 +57,12 @@ const App = () => {
           setPersons(persons.concat(createdPerson))
           setNewName('')
           setNewNumber('')
+          setNotification(
+            `Added ${createdPerson.name}`
+          )
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000)
         })
     }
   }
@@ -84,6 +98,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification} />
       <Filter value={filter} handler={handleFilterChange} />
       <h2>add a new</h2>
       <PersonForm 
