@@ -11,6 +11,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [notification, setNotification] = useState(null)
+  const [notificationType, setNotificationType] = useState("info")
 
   const initialDataLoadHook = () => {
     personService
@@ -39,6 +40,7 @@ const App = () => {
             setNotification(
               `Changed number of ${person.name}`
             )
+            setNotificationType("info")
             setTimeout(() => {
               setNotification(null)
             }, 5000)
@@ -60,6 +62,7 @@ const App = () => {
           setNotification(
             `Added ${createdPerson.name}`
           )
+          setNotificationType("info")
           setTimeout(() => {
             setNotification(null)
           }, 5000)
@@ -77,7 +80,13 @@ const App = () => {
           setPersons(persons.filter(p => p.id != person.id))
         })
         .catch(() => {
-          alert(`${person.name} was already deleted.`)
+          setNotification(
+            `Information of ${person.name} has already been removed from server`
+          )
+          setNotificationType("error")
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000)
           setPersons(persons.filter(p => p.id != person.id))
         })
     }
@@ -98,7 +107,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={notification} />
+      <Notification message={notification} type={notificationType}/>
       <Filter value={filter} handler={handleFilterChange} />
       <h2>add a new</h2>
       <PersonForm 
